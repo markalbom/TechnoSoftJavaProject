@@ -1,5 +1,8 @@
 package MyFirstPackage;
 
+import java.sql.SQLOutput;
+import java.util.Arrays;
+
 public class MAHomeworkStringAndArrayManipulationDecember19 {
     public static void main(String[] args) {
         String myStatement = "I am a good programmer";
@@ -7,15 +10,14 @@ public class MAHomeworkStringAndArrayManipulationDecember19 {
         //1 (string)
         // extract "programmer" from myStatement
            String [] extractedWords = myStatement.split(" ");
-           System.out.println(extractedWords);
+           System.out.println(Arrays.toString(extractedWords));
+           System.out.println(extractedWords[4]);
 
 
         //display the total number of words in myStatement
-            //split method to get array of all words
-            //length method to find length of the array
-            //String wordCollection[] = myStatement.split(" ");
-            //int wordTotal = wordCollection.length();
-            //System.out.println(wordTotal);
+            String [] totalWords = myStatement.split(" ");  //create totalWords array, which has value of myStatement, split on the " "
+            int totalWordCount = totalWords.length;            //create totalWordCount var (expect an int result), which has value of totalWords array length
+            System.out.println(totalWordCount);
 
         //replace all the 'r' characters with 'f' characters
             String replaced = myStatement.replace("r","f");
@@ -48,6 +50,7 @@ public class MAHomeworkStringAndArrayManipulationDecember19 {
 
         // print the names of all friends
             System.out.println(friends.toString());
+            System.out.println(Arrays.toString(friends));
 
         // does the name in the 2nd position (1st index) start with 'A'?
             boolean startsWithA = friends[1].startsWith("A");
