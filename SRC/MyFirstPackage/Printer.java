@@ -36,9 +36,8 @@ public class Printer {
     //create method that allows user to view the current toner level
     // 1:1 ratio of toner to page
     public void viewTonerLevel(){
-        int revisedTonerLevel = (tonerLevel - printedPages);
-        System.out.println("your current toner level: " + (revisedTonerLevel));
-        if (revisedTonerLevel < 1){
+        System.out.println("your current toner level: " + (tonerLevel));
+        if (tonerLevel < 1){
             System.out.println("your current toner level is less than one.  low toner, please add more toner");
         }
     }
@@ -47,8 +46,9 @@ public class Printer {
     //view total number of pages printed
     //view total number of pages remaining
     public void printSummary () {
-        System.out.println("you have printed a total of " + this.printedPages + " pages");
-        System.out.println("you have " + this.pageAllotment + " pages remaining");
+        System.out.println("total printed pages:  " + this.printedPages + " pages");
+        System.out.println("pages remaining : " + this.pageAllotment + " pages");
+        System.out.println("toner level: " + this.tonerLevel);
         if (this.pageAllotment == 1){
             System.out.println("you have one page remaining.  Please add more paper");
         }
@@ -57,20 +57,21 @@ public class Printer {
 
     //create method that allows users to print
     //accepts string 'single' or 'double' for type of print, and int for number of pages to be printed
-        //if single --> update total printed pages (field var), update total page allotment (field var)
-        //if double -> user prints double page (printed page / 2), (toner * 2)
+        //if single --> user prints single page; update total printed pages (field var), update total page allotment (field var)
+        //if double --> user prints double-sided single page (printed page / 2), (toner / 2); ibid.
 
-    public void print (String var, int printedPages) {
-        if (var == "single") {                                                                 //if user chooses single page print
-            this.printedPages = this.printedPages + printedPages;                              //update field var of printedPages to include local var printedPages (what you are passing in)
-            System.out.println("you have just printed " + printedPages + " single pages");
-            this.pageAllotment = this.pageAllotment - printedPages;
-        } else if (var == "double"){                                                           //else if user chooses double page print
-            this.printedPages = ((this.printedPages + printedPages) / 2);
-            this.tonerLevel = (this.tonerLevel + tonerLevel) / 2;
-            System.out.println("you have just printed " + (printedPages / 2) + " double-sided pages");
-            this.pageAllotment = (this.pageAllotment - printedPages) / 2;
-        }
+    public void print (String var, int singlePrintedPagesRequested) {
+        if (var == "single") {                                                                  //if user chooses single page print
+            this.printedPages = this.printedPages + singlePrintedPagesRequested;                //update field var of printedPages to include local var printedPages (what you are passing in)
+            System.out.println("you have just printed " + singlePrintedPagesRequested + " single pages");
+            this.pageAllotment = this.pageAllotment - singlePrintedPagesRequested;
+            this.tonerLevel = (this.tonerLevel - singlePrintedPagesRequested);
+        } else if (var == "double"){                                                            //if user chooses double page print
+            this.printedPages = ((this.printedPages + (singlePrintedPagesRequested) / 2));      //field var printedPage updated
+            System.out.println("you have just printed " + (singlePrintedPagesRequested / 2) + " double-sided pages");
+            this.pageAllotment = (this.pageAllotment - (singlePrintedPagesRequested / 2));      //field var pageAllotment updated
+            this.tonerLevel = (this.tonerLevel - (singlePrintedPagesRequested / 2));            //field var tonerLevel updated
+            }
         }
 }
 
